@@ -21,7 +21,7 @@ pipeline {
             steps {            
                 script {
                     sh ''' 
-                    docker build -t $REPOSITORY/$CONTAINER_NAME:$BUILD_NUMBER .
+                    docker build -t cam/container:1 .
                     docker image ls
                     '''
                 }
@@ -32,9 +32,9 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    curl --progress-bar -L --header "Authorization: Bearer ${TWISTLOCK_TOKEN}" https://us-west1.cloud.twistlock.com/us-4-161026387/api/v1/util/twistcli > twistcli
+                    curl --progress-bar -L --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJyb2xlUGVybXMiOltbMjU1LDI1NSwyNTUsMjU1LDI1NSw5NV0sWzI1NSwyNTUsMjU1LDI1NSwyNTUsOTVdXSwic2Vzc2lvblRpbWVvdXRTZWMiOjE4MDAsImlzcyI6InR3aXN0bG9jayIsImV4cCI6MTcyNDM1Mjg0Nn0.3ZyIXGmN_xDwzwybpHsGglH0znAfDtoIK66POp1J86s" https://10.160.154.170:8083/api/v1/util/twistcli > twistcli
                     chmod a+x twistcli
-                    ./twistcli images scan --address ${PCC_CONSOLE_URL} --token ${TWISTLOCK_TOKEN}
+                    ./twistcli images scan --address https://10.160.154.170:8083 --token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJyb2xlUGVybXMiOltbMjU1LDI1NSwyNTUsMjU1LDI1NSw5NV0sWzI1NSwyNTUsMjU1LDI1NSwyNTUsOTVdXSwic2Vzc2lvblRpbWVvdXRTZWMiOjE4MDAsImlzcyI6InR3aXN0bG9jayIsImV4cCI6MTcyNDM1Mjg0Nn0.3ZyIXGmN_xDwzwybpHsGglH0znAfDtoIK66POp1J86s --details cam/image:1
                     '''
                 }
             }
