@@ -3,9 +3,11 @@ pipeline {
     environment {
         REPOSITORY = 'registry-server:5000'
         PCC_CONSOLE_URL = "10.160.154.170:8083"
+        //In Prisma UTD insert private Prisma Compute example (10.160.154.170:8083) and for Public identity by DNS address (https://us-west1.cloud.twistlock.com/us-4-161026387) under Manage>>System>>Utilities>>Path to Console
         CONTAINER_NAME = "ubuntu"
         // Use Jenkins credentials or environment variables for sensitive data
         TWISTLOCK_TOKEN = credentials('twistlock-token-id')
+        // Token found in Prisma under Manage>>System>>Utilities>>>>API token
         DOCKER_REGISTRY_TOKEN = credentials('docker-registry-token-id')
     }
     stages {
@@ -41,7 +43,7 @@ pipeline {
     post {
         always {
             echo 'Pipeline completed'
-            // Optionally, perform cleanup tasks here
+            // Cleanup tasks completed
         }
     }
 }
